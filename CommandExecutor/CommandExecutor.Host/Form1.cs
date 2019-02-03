@@ -20,6 +20,8 @@ namespace CommandExecutor.Host
             InitializeComponent();
             commandExecutorService = new CommandExecutorService();
             commandExecutorService.MessageRecieved += CommandExecutorService_MessageRecieved;
+            WindowState = FormWindowState.Minimized;
+            
         }
 
         private void CommandExecutorService_MessageRecieved(object sender, CommandReceived commandReceived)
@@ -27,26 +29,25 @@ namespace CommandExecutor.Host
             richTextBox1.Text += DateTime.Now + ": " + commandReceived.Type + " " + commandReceived.Message + Environment.NewLine;
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            host = new ServiceHost(commandExecutorService);
-            host.Open();
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             host.Close();
+        }
+
+        private void ToTray()
+        {
+            Hide();
+            notifyIcon.Visible = true;
+            notifyIcon.BalloonTipTitle = "CommandExecutor";
+            notifyIcon.BalloonTipText = "Working";
+            notifyIcon.ShowBalloonTip(1000);
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                Hide();
-                notifyIcon.Visible = true;
-                notifyIcon.BalloonTipTitle = "CommandExecutor";
-                notifyIcon.BalloonTipText = "Working";
-                notifyIcon.ShowBalloonTip(1000);
+                ToTray();
             }
         }
 
@@ -55,6 +56,12 @@ namespace CommandExecutor.Host
             Show();
             WindowState = FormWindowState.Normal;
             notifyIcon.Visible = false;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            host = new ServiceHost(commandExecutorService);
+            host.Open();
         }
     }
 }
