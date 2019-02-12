@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e139f1e9-e5eb-48b8-aa5c-b14dd3d85113" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.1.38:49001/ICommandExecutorService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ICommandExecutorService.disco" MetadataType="Disco" ID="c83c246d-e56f-4a93-a35f-af153262b3ca" SourceId="1" SourceUrl="http://localhost:49001/ICommandExecutorService?disco" />
+    <MetadataFile FileName="CommandExecutorService.wsdl" MetadataType="Wsdl" ID="30c75bc6-aca2-4dfd-ab96-0e5575376d7a" SourceId="1" SourceUrl="http://localhost:49001/ICommandExecutorService?wsdl" />
+    <MetadataFile FileName="ICommandExecutorService.xsd" MetadataType="Schema" ID="fba9c4f6-da71-4873-bc29-75c0cec72b66" SourceId="1" SourceUrl="http://localhost:49001/ICommandExecutorService?xsd=xsd1" />
+    <MetadataFile FileName="ICommandExecutorService1.xsd" MetadataType="Schema" ID="a8cb53df-26d4-4a11-8f82-d39e1553939f" SourceId="1" SourceUrl="http://localhost:49001/ICommandExecutorService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

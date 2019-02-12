@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CommandExecutor
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single)]
     public class CommandExecutorService : ICommandExecutorService
     {
         public delegate void MessageReceivedHandler(object sender, CommandReceived commandReceived);
@@ -62,5 +64,12 @@ namespace CommandExecutor
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.CancelShutdown, ""));
         }
 
+        public void SetVolume(int level)
+        {
+            defaultPlaybackDevice.Volume = level;
+            MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SetVolume, $"new volume is {defaultPlaybackDevice.Volume}"));
+        }
+
+     
     }
 }

@@ -20,6 +20,9 @@ namespace CommandExecutor
         int GetVolumeLevel();
 
         [OperationContract]
+        void SetVolume(int level);
+
+        [OperationContract]
         void Mute();
 
         [OperationContract]
