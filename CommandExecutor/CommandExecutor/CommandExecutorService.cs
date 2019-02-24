@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CommandExecutor
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single, AddressFilterMode = AddressFilterMode.Any)]
     public class CommandExecutorService : ICommandExecutorService
     {
         public delegate void MessageReceivedHandler(object sender, CommandReceived commandReceived);
