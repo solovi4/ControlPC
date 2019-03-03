@@ -17,7 +17,7 @@ namespace CommandMaker
         static void Main(string[] args)
         {
             if (args.Length != 1) return;
-            var channel = new ChannelFactory<ICommandExecutorService>("CommandMaker");
+            var channel = new ChannelFactory<ServiceReference1.ICommandExecutorService>("WSHttpBinding_ICommandExecutorService");
             var executor = channel.CreateChannel();
             var command = args[0];
             switch(command)
