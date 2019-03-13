@@ -37,10 +37,7 @@ namespace CommandExecutor.Host
         private void ToTray()
         {
             Hide();
-            notifyIcon.Visible = true;
-            notifyIcon.BalloonTipTitle = "CommandExecutor";
-            notifyIcon.BalloonTipText = "Working";
-            notifyIcon.ShowBalloonTip(1000);
+            notifyIcon.Visible = true;            
         }
 
         private void Form1_Resize(object sender, EventArgs e)
