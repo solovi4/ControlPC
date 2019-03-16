@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CommandExecutor
 {
@@ -17,19 +19,22 @@ namespace CommandExecutor
         public delegate void MessageReceivedHandler(object sender, CommandReceived commandReceived);
         public event MessageReceivedHandler MessageRecieved;
         private CoreAudioDevice defaultPlaybackDevice;
+
         public CommandExecutorService()
         {
-            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+            
         }
 
         public int GetVolumeLevel()
         {
+            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.GetVolumeLevel, defaultPlaybackDevice.Volume.ToString()));
             return (int)defaultPlaybackDevice.Volume;
         }
 
         public void Mute()
         {
+            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
             defaultPlaybackDevice.Mute(!defaultPlaybackDevice.IsMuted);
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.Mute, defaultPlaybackDevice.IsMuted.ToString()));
         }
@@ -42,12 +47,14 @@ namespace CommandExecutor
 
         public void VolumeDecrease()
         {
+            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
             defaultPlaybackDevice.Volume -= 10;
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.VolumeDecrease, $"new volume is {defaultPlaybackDevice.Volume}"));
         }
 
         public void VolumeIncrease()
         {
+            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
             defaultPlaybackDevice.Volume += 10;
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.VolumeIncrease, $"new volume is {defaultPlaybackDevice.Volume}"));
         }
@@ -66,10 +73,15 @@ namespace CommandExecutor
 
         public void SetVolume(int level)
         {
+            defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
             defaultPlaybackDevice.Volume = level;
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SetVolume, $"new volume is {defaultPlaybackDevice.Volume}"));
         }
 
-     
+        public void MoveCursor(int dx, int dy)
+        {
+            Cursor.Position = new Point(Cursor.Position.X + dx, Cursor.Position.Y + dy);
+            MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.MoveCursor, $"move cursor dx = {dx} dy = {dy}"));
+        }
     }
 }

@@ -31,5 +31,8 @@ namespace CommandExecutor
         [OperationContract]
         void CancelShutDown();
 
+        [OperationContract]
+        void MoveCursor(int dx, int dy);
+
     }
 }

@@ -33,5 +33,12 @@ namespace CommandExecutor.Tests
             commandExecutor.Mute();
             Assert.AreNotEqual(isMuted, commandExecutor.IsMuted());
         }
+
+        [TestMethod]
+        public void MoveCursor()
+        {
+            var commandExecutor = new CommandExecutorService();
+            commandExecutor.MoveCursor(100, 100);
+        }
     }
 }

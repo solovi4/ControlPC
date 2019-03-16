@@ -8,7 +8,7 @@ namespace CommandExecutor
 {
     public class CommandReceived : EventArgs
     {
-        public enum CommandTypes { VolumeIncrease, VolumeDecrease, SetVolume, GetVolumeLevel, Mute, IsMuted, Shutdown, CancelShutdown };
+        public enum CommandTypes { VolumeIncrease, VolumeDecrease, SetVolume, GetVolumeLevel, Mute, IsMuted, Shutdown, CancelShutdown, MoveCursor };
         public CommandTypes Type { get; private set; }
         public string Message { get; private set; }
         public CommandReceived(CommandTypes type, string message)
