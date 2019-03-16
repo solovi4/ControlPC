@@ -34,5 +34,11 @@ namespace CommandExecutor
         [OperationContract]
         void MoveCursor(int dx, int dy);
 
+        [OperationContract]
+        void MouseLeftClick();
+
+        [OperationContract]
+        void MouseRightClick();
+
     }
 }

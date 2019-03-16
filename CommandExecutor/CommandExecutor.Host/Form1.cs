@@ -15,18 +15,26 @@ namespace CommandExecutor.Host
     {
         private ServiceHost host;
         private CommandExecutorService commandExecutorService;
+        private DataTable dataTable;
         public Form1()
         {
             InitializeComponent();
             commandExecutorService = new CommandExecutorService();
             commandExecutorService.MessageRecieved += CommandExecutorService_MessageRecieved;
             WindowState = FormWindowState.Minimized;
-            
+            dataTable = new DataTable();
+            dataTable.Columns.Add(new DataColumn("Date", typeof(DateTime)));
+            dataTable.Columns.Add(new DataColumn("Command", typeof(CommandReceived.CommandTypes)));
+            dataTable.Columns.Add(new DataColumn("Text", typeof(string)));
+            dataGridView1.DataSource = dataTable;
+
+
         }
 
         private void CommandExecutorService_MessageRecieved(object sender, CommandReceived commandReceived)
         {
-            richTextBox1.Text += DateTime.Now + ": " + commandReceived.Type + " " + commandReceived.Message + Environment.NewLine;
+            dataTable.Rows.Add(DateTime.Now, commandReceived.Type, commandReceived.Message);
+            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -60,5 +68,6 @@ namespace CommandExecutor.Host
             host = new ServiceHost(commandExecutorService);
             host.Open();
         }
+
     }
 }
