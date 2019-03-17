@@ -40,5 +40,8 @@ namespace CommandExecutor
         [OperationContract]
         void MouseRightClick();
 
+        [OperationContract]
+        void SendText(string text);
+
     }
 }

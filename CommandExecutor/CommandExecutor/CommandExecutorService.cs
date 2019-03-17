@@ -102,5 +102,10 @@ namespace CommandExecutor
             uint Y = (uint)Cursor.Position.Y;
             mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
         }
+
+        public void SendText(string text)
+        {
+            SendKeys.SendWait(text);
+        }
     }
 }
