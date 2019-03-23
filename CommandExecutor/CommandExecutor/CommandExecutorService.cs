@@ -106,6 +106,7 @@ namespace CommandExecutor
         public void SendText(string text)
         {
             SendKeys.SendWait(text);
+            MessageRecieved.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SendText, text));
         }
     }
 }
