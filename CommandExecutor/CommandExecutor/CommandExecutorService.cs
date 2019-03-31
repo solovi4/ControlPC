@@ -86,27 +86,40 @@ namespace CommandExecutor
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
-        private const int MOUSEEVENTF_RIGHTUP = 0x10;
-
-        public void MouseLeftClick()
-        {
-            //Call the imported function with the cursor's current position
-            uint X = (uint)Cursor.Position.X;
-            uint Y = (uint)Cursor.Position.Y;
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
-        }
-
-        public void MouseRightClick()
-        {
-            uint X = (uint)Cursor.Position.X;
-            uint Y = (uint)Cursor.Position.Y;
-            mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
-        }
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;      
 
         public void SendText(string text)
         {
             SendKeys.SendWait(text);
             MessageRecieved.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SendText, text));
+        }
+
+        public void MouseLeftButtonDown()
+        {
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
+        }
+
+        public void MouseLeftButtonUp()
+        {
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+        }
+
+        public void MouseRightButtonDown()
+        {
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, X, Y, 0, 0);
+        }
+
+        public void MouseRightButtonUp()
+        {
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
         }
     }
 }

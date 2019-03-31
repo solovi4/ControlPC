@@ -56,6 +56,30 @@ namespace CommandMaker.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/CancelShutDown", ReplyAction="http://tempuri.org/ICommandExecutorService/CancelShutDownResponse")]
         System.Threading.Tasks.Task CancelShutDownAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MoveCursor", ReplyAction="http://tempuri.org/ICommandExecutorService/MoveCursorResponse")]
+        void MoveCursor(int dx, int dy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MoveCursor", ReplyAction="http://tempuri.org/ICommandExecutorService/MoveCursorResponse")]
+        System.Threading.Tasks.Task MoveCursorAsync(int dx, int dy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MouseLeftClick", ReplyAction="http://tempuri.org/ICommandExecutorService/MouseLeftClickResponse")]
+        void MouseLeftClick();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MouseLeftClick", ReplyAction="http://tempuri.org/ICommandExecutorService/MouseLeftClickResponse")]
+        System.Threading.Tasks.Task MouseLeftClickAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MouseRightClick", ReplyAction="http://tempuri.org/ICommandExecutorService/MouseRightClickResponse")]
+        void MouseRightClick();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/MouseRightClick", ReplyAction="http://tempuri.org/ICommandExecutorService/MouseRightClickResponse")]
+        System.Threading.Tasks.Task MouseRightClickAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/SendText", ReplyAction="http://tempuri.org/ICommandExecutorService/SendTextResponse")]
+        void SendText(string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandExecutorService/SendText", ReplyAction="http://tempuri.org/ICommandExecutorService/SendTextResponse")]
+        System.Threading.Tasks.Task SendTextAsync(string text);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -139,6 +163,38 @@ namespace CommandMaker.ServiceReference1 {
         
         public System.Threading.Tasks.Task CancelShutDownAsync() {
             return base.Channel.CancelShutDownAsync();
+        }
+        
+        public void MoveCursor(int dx, int dy) {
+            base.Channel.MoveCursor(dx, dy);
+        }
+        
+        public System.Threading.Tasks.Task MoveCursorAsync(int dx, int dy) {
+            return base.Channel.MoveCursorAsync(dx, dy);
+        }
+        
+        public void MouseLeftClick() {
+            base.Channel.MouseLeftClick();
+        }
+        
+        public System.Threading.Tasks.Task MouseLeftClickAsync() {
+            return base.Channel.MouseLeftClickAsync();
+        }
+        
+        public void MouseRightClick() {
+            base.Channel.MouseRightClick();
+        }
+        
+        public System.Threading.Tasks.Task MouseRightClickAsync() {
+            return base.Channel.MouseRightClickAsync();
+        }
+        
+        public void SendText(string text) {
+            base.Channel.SendText(text);
+        }
+        
+        public System.Threading.Tasks.Task SendTextAsync(string text) {
+            return base.Channel.SendTextAsync(text);
         }
     }
 }

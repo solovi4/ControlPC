@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace CommandMaker
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             if (args.Length != 1) return;
             var channel = new ChannelFactory<ServiceReference1.ICommandExecutorService>("WSHttpBinding_ICommandExecutorService");

@@ -55,6 +55,30 @@
   <wsdl:message name="ICommandExecutorService_CancelShutDown_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelShutDownResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MoveCursor_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveCursor" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MoveCursor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveCursorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MouseLeftClick_InputMessage">
+    <wsdl:part name="parameters" element="tns:MouseLeftClick" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MouseLeftClick_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MouseLeftClickResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MouseRightClick_InputMessage">
+    <wsdl:part name="parameters" element="tns:MouseRightClick" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_MouseRightClick_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MouseRightClickResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_SendText_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendText" />
+  </wsdl:message>
+  <wsdl:message name="ICommandExecutorService_SendText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTextResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICommandExecutorService">
     <wsdl:operation name="VolumeIncrease">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/VolumeIncrease" message="tns:ICommandExecutorService_VolumeIncrease_InputMessage" />
@@ -83,6 +107,22 @@
     <wsdl:operation name="CancelShutDown">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/CancelShutDown" message="tns:ICommandExecutorService_CancelShutDown_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommandExecutorService/CancelShutDownResponse" message="tns:ICommandExecutorService_CancelShutDown_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveCursor">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/MoveCursor" message="tns:ICommandExecutorService_MoveCursor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommandExecutorService/MoveCursorResponse" message="tns:ICommandExecutorService_MoveCursor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MouseLeftClick">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/MouseLeftClick" message="tns:ICommandExecutorService_MouseLeftClick_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommandExecutorService/MouseLeftClickResponse" message="tns:ICommandExecutorService_MouseLeftClick_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MouseRightClick">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/MouseRightClick" message="tns:ICommandExecutorService_MouseRightClick_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommandExecutorService/MouseRightClickResponse" message="tns:ICommandExecutorService_MouseRightClick_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendText">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommandExecutorService/SendText" message="tns:ICommandExecutorService_SendText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommandExecutorService/SendTextResponse" message="tns:ICommandExecutorService_SendText_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ICommandExecutorService" type="tns:ICommandExecutorService">
@@ -144,6 +184,42 @@
     </wsdl:operation>
     <wsdl:operation name="CancelShutDown">
       <soap12:operation soapAction="http://tempuri.org/ICommandExecutorService/CancelShutDown" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveCursor">
+      <soap12:operation soapAction="http://tempuri.org/ICommandExecutorService/MoveCursor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MouseLeftClick">
+      <soap12:operation soapAction="http://tempuri.org/ICommandExecutorService/MouseLeftClick" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MouseRightClick">
+      <soap12:operation soapAction="http://tempuri.org/ICommandExecutorService/MouseRightClick" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendText">
+      <soap12:operation soapAction="http://tempuri.org/ICommandExecutorService/SendText" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
