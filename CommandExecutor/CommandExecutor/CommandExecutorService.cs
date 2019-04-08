@@ -1,4 +1,5 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
+﻿using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,25 +10,36 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CommandExecutor
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single, AddressFilterMode = AddressFilterMode.Any)]
-    public class CommandExecutorService : ICommandExecutorService
+    public class CommandExecutorService : ICommandExecutorService, IObserver<DefaultDeviceChangedArgs>
     {
         public delegate void MessageReceivedHandler(object sender, CommandReceived commandReceived);
         public event MessageReceivedHandler MessageRecieved;
         private CoreAudioDevice defaultPlaybackDevice;
+        private IEnumerable<IDevice> audioDevices;
 
         public CommandExecutorService()
         {
             defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+            defaultPlaybackDevice.DefaultChanged.Subscribe(this);            
+            Subscribe();
+        }
+
+        private void Subscribe()
+        {
+            audioDevices = new CoreAudioController().GetPlaybackDevices(DeviceState.Active);
+            foreach (var audioDevice in audioDevices)
+                audioDevice.DefaultChanged.Subscribe(this);
         }
 
         public int GetVolumeLevel()
-        {
+        {            
             MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.GetVolumeLevel, defaultPlaybackDevice.Volume.ToString()));
             return (int)defaultPlaybackDevice.Volume;
         }
@@ -91,7 +103,7 @@ namespace CommandExecutor
         public void SendText(string text)
         {
             SendKeys.SendWait(text);
-            MessageRecieved.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SendText, text));
+            MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.SendText, text));
         }
 
         public void MouseLeftButtonDown()
@@ -120,6 +132,26 @@ namespace CommandExecutor
             uint X = (uint)Cursor.Position.X;
             uint Y = (uint)Cursor.Position.Y;
             mouse_event(MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
+        }
+
+        public void OnNext(DefaultDeviceChangedArgs value)
+        {
+            var newDefaultDevice = (CoreAudioDevice)value.Device;
+            if (defaultPlaybackDevice.Id != newDefaultDevice.Id)
+            {
+                defaultPlaybackDevice = (CoreAudioDevice)value.Device;
+                MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.Other, "Default audio device changed"));
+            }
+        }
+
+        public void OnError(Exception error)
+        {
+            MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.Other, $"exception on change audio device {error.Message}"));
+        }
+
+        public void OnCompleted()
+        {
+            
         }
     }
 }

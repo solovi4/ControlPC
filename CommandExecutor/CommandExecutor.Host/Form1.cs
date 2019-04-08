@@ -30,8 +30,15 @@ namespace CommandExecutor.Host
 
         private void CommandExecutorService_MessageRecieved(object sender, CommandReceived commandReceived)
         {
-            dataTable.Rows.Add(DateTime.Now, commandReceived.Type, commandReceived.Message);
-            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];           
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)(() => CommandExecutorService_MessageRecieved(sender, commandReceived)));
+            }
+            else
+            {
+                dataTable.Rows.Add(DateTime.Now, commandReceived.Type, commandReceived.Message);
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
