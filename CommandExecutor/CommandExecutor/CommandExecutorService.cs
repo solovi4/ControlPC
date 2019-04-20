@@ -33,7 +33,7 @@ namespace CommandExecutor
 
         private void Subscribe()
         {
-            audioDevices = new CoreAudioController().GetPlaybackDevices(DeviceState.Active);
+            audioDevices = new CoreAudioController().GetPlaybackDevices(DeviceState.All);
             foreach (var audioDevice in audioDevices)
                 audioDevice.DefaultChanged.Subscribe(this);
         }
@@ -89,7 +89,7 @@ namespace CommandExecutor
         public void MoveCursor(int dx, int dy)
         {
             Cursor.Position = new Point(Cursor.Position.X + dx, Cursor.Position.Y + dy);
-            MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.MoveCursor, $"move cursor dx = {dx} dy = {dy}"));
+            //MessageRecieved?.Invoke(this, new CommandReceived(CommandReceived.CommandTypes.MoveCursor, $"move cursor dx = {dx} dy = {dy}"));
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
